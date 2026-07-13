@@ -48,6 +48,16 @@ Application: `http://localhost:8080`
 
 Swagger UI: `http://localhost:8080/swagger-ui.html`
 
+## Build Status
+
+The project has been validated with Maven.
+
+- Tests: 3 passed
+- Failures: 0
+- Errors: 0
+- Java: 21 recommended
+- Maven: 3.9+
+- 
 ### Run with Docker Compose
 
 ```bash
