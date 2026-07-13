@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ztidb
+      POSTGRES_USER: zti_user
+      POSTGRES_PASSWORD: zti_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/ztidb
+      DB_USERNAME: zti_user
+      DB_PASSWORD: zti_password
+      JWT_SECRET: change-this-to-a-long-strong-production-secret-key-256-bit-minimum
+      JWT_EXPIRATION_MINUTES: 30
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
