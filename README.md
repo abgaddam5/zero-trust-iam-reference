@@ -85,8 +85,10 @@ The project demonstrates practical implementation of modern IAM concepts includi
 
 ### Documentation
 
-- OpenAPI / Swagger
-- REST API Documentation
+- [Software Architecture](docs/architecture.md)
+- [Threat Model](docs/threat-model.md)
+- [API Reference](docs/api.md)
+- [Deployment Guide](docs/deployment.md)
 
 ---
 
