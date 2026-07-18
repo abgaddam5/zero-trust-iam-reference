@@ -7,7 +7,7 @@
 ![Security](https://img.shields.io/badge/Spring_Security-6.x-brightgreen)
 ![JWT](https://img.shields.io/badge/JWT-Authentication-orange)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
-![Build](https://img.shields.io/badge/Build-Maven-red)
+[![Java CI](https://github.com/abgaddam5/zero-trust-iam-reference/actions/workflows/ci.yml/badge.svg)](https://github.com/abgaddam5/zero-trust-iam-reference/actions/workflows/ci.yml)
 
 ---
 
