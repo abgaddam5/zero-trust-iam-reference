@@ -1,137 +1,461 @@
 # Zero Trust IAM Reference
 
-An open-source reference implementation demonstrating practical Zero Trust identity security patterns using Spring Boot, Spring Security, JWT, RBAC, password policy enforcement, audit logging, Docker, and PostgreSQL.
+> **An educational reference implementation demonstrating modern Identity and Access Management (IAM) principles using Spring Boot, JWT authentication, Role-Based Access Control (RBAC), secure password management, and security audit logging.**
 
-> This project is educational and built only with public, open-source technologies. It does not include code, configurations, internal architecture, or proprietary details from any employer or client organization.
+![Java](https://img.shields.io/badge/Java-21-blue)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-success)
+![Security](https://img.shields.io/badge/Spring_Security-6.x-brightgreen)
+![JWT](https://img.shields.io/badge/JWT-Authentication-orange)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Build](https://img.shields.io/badge/Build-Maven-red)
 
-## Why this project exists
+---
 
-Identity is a critical control plane for modern enterprises. This project demonstrates a clean, auditable, and extensible approach to authentication and authorization that can be used as a learning reference for secure application design.
+# Overview
 
-## Features
+Modern enterprise applications rely on strong Identity and Access Management (IAM) to protect users, applications, and critical business resources. As organizations adopt Zero Trust security principles, authentication, authorization, auditing, and secure credential management have become fundamental building blocks of secure software.
 
-- User registration
-- Secure login
-- JWT-based stateless authentication
-- Role-based access control: `USER`, `ADMIN`
+**Zero Trust IAM Reference** is an open-source educational reference implementation designed to demonstrate these concepts using widely adopted Java technologies and enterprise software engineering practices.
+
+The project illustrates how secure authentication, authorization, password protection, and audit logging can be implemented using publicly available technologies without relying on proprietary enterprise solutions.
+
+This repository is intended for:
+
+- Software Engineers
+- Enterprise IAM Engineers
+- Cybersecurity Professionals
+- Students
+- Developers learning Spring Security
+
+---
+
+# Objectives
+
+The project demonstrates practical implementation of modern IAM concepts including:
+
+- Secure user registration
+- JWT-based authentication
+- Role-Based Access Control (RBAC)
 - BCrypt password hashing
-- Password policy validation
-- Authentication audit logging
-- Spring Security 6 configuration
-- OpenAPI / Swagger documentation
-- Docker Compose with PostgreSQL
-- Health endpoint with Spring Boot Actuator
-- GitHub Actions CI workflow
+- Security audit logging
+- REST API protection
+- Secure Spring Security configuration
+- Enterprise application layering
+- Modern Java development practices
 
-## Technology stack
+---
 
-- Java 21
-- Spring Boot 3
-- Spring Security 6
-- Spring Data JPA
-- PostgreSQL / H2
-- JWT using JJWT
-- Maven
-- Docker
-- OpenAPI / Swagger UI
-- JUnit 5
+# Key Features
 
-## Quick start
+### Authentication
 
-### Run locally with H2
+- User Registration
+- Secure Login
+- JWT Token Generation
+- JWT Validation
+- Stateless Authentication
+
+### Authorization
+
+- Role-Based Access Control (RBAC)
+- User Role Protection
+- Admin-only Endpoints
+- Protected REST APIs
+
+### Security
+
+- BCrypt Password Hashing
+- Spring Security
+- Authentication Filter
+- Authorization Rules
+- Secure Password Storage
+
+### Auditing
+
+- User Registration Events
+- Login Events
+- Timestamped Audit Records
+- Security Event Tracking
+
+### Monitoring
+
+- Spring Boot Actuator
+- Health Endpoint
+- Application Status
+
+### Documentation
+
+- OpenAPI / Swagger
+- REST API Documentation
+
+---
+
+# Technology Stack
+
+| Layer | Technology |
+|---------|------------|
+| Language | Java 21 |
+| Framework | Spring Boot 3 |
+| Security | Spring Security |
+| Authentication | JWT |
+| Password Encryption | BCrypt |
+| ORM | Spring Data JPA |
+| Database | H2 |
+| Build Tool | Maven |
+| Documentation | OpenAPI / Swagger |
+| Monitoring | Spring Boot Actuator |
+
+---
+
+# Project Architecture
+
+```
+                Client
+
+                  │
+
+                  ▼
+
+         REST Controllers
+
+                  │
+
+                  ▼
+
+        Spring Security Filter
+
+                  │
+
+                  ▼
+
+          JWT Authentication
+
+                  │
+
+                  ▼
+
+          Business Services
+
+                  │
+
+                  ▼
+
+          JPA Repositories
+
+                  │
+
+                  ▼
+
+             H2 Database
+```
+
+---
+
+# Project Structure
+
+```
+src
+ ├── controller
+ │      ├── AuthController
+ │      ├── UserController
+ │      └── AdminController
+ │
+ ├── security
+ │      ├── SecurityConfig
+ │      ├── JwtService
+ │      └── JwtAuthenticationFilter
+ │
+ ├── service
+ │
+ ├── repository
+ │
+ ├── entity
+ │
+ ├── dto
+ │
+ └── config
+```
+
+---
+
+# Authentication Flow
+
+```
+User
+
+↓
+
+Register
+
+↓
+
+Password Validation
+
+↓
+
+BCrypt Hashing
+
+↓
+
+Store User
+
+↓
+
+Login
+
+↓
+
+Credential Verification
+
+↓
+
+JWT Generation
+
+↓
+
+Bearer Token
+
+↓
+
+Protected APIs
+```
+
+---
+
+# Authorization Model
+
+The application implements Role-Based Access Control (RBAC).
+
+Current roles include:
+
+- ROLE_USER
+- ROLE_ADMIN
+
+Example:
+
+| Endpoint | Access |
+|------------|---------|
+| /api/auth/register | Public |
+| /api/auth/login | Public |
+| /api/users/me | Authenticated User |
+| /api/admin/status | Admin Only |
+
+---
+
+# Database Schema
+
+The application maintains three primary entities.
+
+### User Accounts
+
+Stores user identity information including:
+
+- Email
+- Password (BCrypt)
+- Status
+- Created Date
+
+### User Roles
+
+Maps users to security roles.
+
+### Audit Events
+
+Captures important security events including:
+
+- Registration
+- Login
+- Timestamp
+- Success Status
+
+---
+
+# Security Features
+
+The project demonstrates several enterprise security practices.
+
+✔ BCrypt password hashing
+
+✔ Stateless JWT Authentication
+
+✔ Role-Based Authorization
+
+✔ Secure endpoint protection
+
+✔ Audit logging
+
+✔ Layered architecture
+
+✔ Dependency Injection
+
+✔ RESTful API design
+
+---
+
+# Running the Application
+
+## Clone Repository
+
+```bash
+git clone https://github.com/abgaddam5/zero-trust-iam-reference.git
+```
+
+## Build
+
+```bash
+mvn clean install
+```
+
+## Run
 
 ```bash
 mvn spring-boot:run
 ```
 
-Application: `http://localhost:8080`
+Application starts at
 
-Swagger UI: `http://localhost:8080/swagger-ui.html`
-
-## Build Status
-
-The project has been validated with Maven.
-
-- Tests: 3 passed
-- Failures: 0
-- Errors: 0
-- Java: 21 recommended
-- Maven: 3.9+
-- 
-### Run with Docker Compose
-
-```bash
-docker compose up --build
+```
+http://localhost:8080
 ```
 
-## Example API usage
+---
 
-### Register
+# API Documentation
 
-```bash
-curl -X POST http://localhost:8080/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"StrongPassword123!"}'
+Swagger UI
+
+```
+http://localhost:8080/swagger-ui.html
 ```
 
-### Login
+Health Endpoint
 
-```bash
-curl -X POST http://localhost:8080/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"StrongPassword123!"}'
+```
+http://localhost:8080/actuator/health
 ```
 
-### Access protected profile endpoint
+H2 Console
 
-```bash
-curl http://localhost:8080/api/users/me \
-  -H "Authorization: Bearer <ACCESS_TOKEN>"
+```
+http://localhost:8080/h2-console
 ```
 
-## Security principles demonstrated
+---
 
-- Verify explicitly: every protected request requires a valid JWT.
-- Use least privilege: role-based access controls restrict privileged endpoints.
-- Assume breach: authentication events are logged for auditability.
-- Reduce password risk: passwords are hashed using BCrypt and validated against basic policy rules.
-- Favor stateless controls: JWTs reduce server-side session exposure.
+# Example Authentication
 
-## Repository structure
+## Register
 
-```text
-zero-trust-iam-reference/
-├── .github/workflows/ci.yml
-├── docs/
-│   ├── api.md
-│   ├── architecture.md
-│   ├── deployment.md
-│   └── threat-model.md
-├── src/
-├── Dockerfile
-├── docker-compose.yml
-├── README.md
-├── LICENSE
-├── SECURITY.md
-├── CONTRIBUTING.md
-└── CHANGELOG.md
+```
+POST /api/auth/register
 ```
 
-## Important limitations
+## Login
 
-This project is a reference implementation. Before production use, teams should add controls such as rate limiting, account lockout, MFA, refresh token rotation, centralized secret management, observability, structured security logging, automated dependency scanning, and formal threat modeling.
+```
+POST /api/auth/login
+```
 
-## Roadmap
+Returns
 
-- TOTP MFA
-- Refresh token rotation
-- Account lockout
-- Rate limiting
-- OpenTelemetry tracing
-- Prometheus metrics
-- Centralized structured logging
-- OAuth2 resource-server profile
+```
+JWT Access Token
+```
 
-## License
+Use
 
-Apache License 2.0. See [LICENSE](LICENSE).
+```
+Authorization: Bearer <token>
+```
+
+to access protected endpoints.
+
+---
+
+# Testing
+
+The application has been functionally validated for:
+
+- User Registration
+- Duplicate Registration
+- Login
+- JWT Authentication
+- Protected Endpoints
+- Role-Based Authorization
+- Audit Logging
+- Database Persistence
+- Application Health
+
+---
+
+# Future Roadmap
+
+Version 1.1
+
+- Time-based One-Time Password (TOTP) Multi-Factor Authentication
+
+Version 1.2
+
+- Refresh Token Rotation
+- Password Reset
+- Account Lockout
+
+Version 1.3
+
+- OpenTelemetry Integration
+- Metrics Collection
+- Distributed Tracing
+
+Version 2.0
+
+- OAuth2
+- OpenID Connect
+- Docker Deployment
+- Kubernetes Deployment
+
+---
+
+# Educational Purpose
+
+This repository is intended as an educational reference implementation that demonstrates Identity and Access Management (IAM) concepts using publicly available technologies.
+
+The implementation does **not** contain proprietary business logic, confidential enterprise code, or organization-specific security implementations.
+
+---
+
+# Contributing
+
+Contributions that improve security, documentation, testing, and educational value are welcome.
+
+Please submit issues and pull requests for review.
+
+---
+
+# License
+
+Released under the MIT License.
+
+---
+
+# Author
+
+**Abhishek Gaddam**
+
+Software Engineer | Identity & Access Management | Enterprise Security
+
+Areas of Interest
+
+- Identity & Access Management (IAM)
+- Zero Trust Security
+- Enterprise Application Security
+- Java & Spring Boot
+- Secure Software Engineering
+- Cloud-Native Security
+
+---
+
+# Disclaimer
+
+This project is provided for educational and research purposes only.
+
+It demonstrates software engineering and security design principles using publicly available technologies. It should not be considered a production-ready identity platform without additional security hardening, operational controls, and comprehensive testing.
